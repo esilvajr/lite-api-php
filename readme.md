@@ -71,7 +71,7 @@ Or you can use the Facade:
 require_once ('vendor/autoload.php');
 
 $liteApiFacade = new \Arquivei\LiteApi\Sdk\Facade();
-$statusEndpointResponse = $liteApiFacade->status("41200403302675000183550010001154151010179820");
+$statusEndpointResponse = $liteApiFacade->status("KEY");
 ```
 
 #### Tests
