@@ -10,11 +10,12 @@ use Arquivei\LiteApi\Sdk\Factories\Responses\NFeFactory;
 
 class NFe
 {
-
-    public function execute(HttpInterface $httpConnection, NFeRequest $nfeRequest, Config $config)
-    {
+    public function execute(
+        HttpInterface $httpConnection,
+        NFeRequest $nfeRequest,
+        Config $config
+    ): \Arquivei\LiteApi\Sdk\Responses\NFe {
         try {
-
             $httpResponse = $httpConnection->get(
                 "GET",
                 $config->getLiteApiHost(),
@@ -32,7 +33,6 @@ class NFe
             );
 
             return (new NFeFactory)->createFromArray($httpResponse);
-
         } catch (\Exception $exception) {
             throw $exception;
         }

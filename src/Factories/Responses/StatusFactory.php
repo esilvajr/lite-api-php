@@ -7,31 +7,30 @@ use Arquivei\LiteApi\Sdk\Responses\Status;
 
 class StatusFactory
 {
-    public function createFromArray(array $httpResponse): Status {
-
+    public function createFromArray(array $httpResponse): Status
+    {
         if ($httpResponse['status']['code'] == 200) {
+            $statusSucessfullyResponse = new Status(new Status\IsSuccess());
 
-            $nfeSucessfullyResponse = new Status(new Status\IsSuccess());
-
-            $nfeSucessfullyResponse->setStatus(
+            $statusSucessfullyResponse->setStatus(
                 (new HttpStatus())
                     ->setCode($httpResponse['status']['code'])->setMessage($httpResponse['status']['message'])
             );
 
-            $nfeSucessfullyResponse->getResponse()->setAccessKey($httpResponse['data']['access_key']);
-            $nfeSucessfullyResponse->getResponse()->setStatus($httpResponse['data']['status']);
+            $statusSucessfullyResponse->getResponse()->setAccessKey($httpResponse['data']['access_key']);
+            $statusSucessfullyResponse->getResponse()->setStatus($httpResponse['data']['status']);
 
-            return $nfeSucessfullyResponse;
+            return $statusSucessfullyResponse;
         }
 
-        $nfeErrorResponse = new Status(new Status\IsError());
+        $statusErrorResponse = new Status(new Status\IsError());
 
-        $nfeErrorResponse->setStatus(
+        $statusErrorResponse->setStatus(
             (new HttpStatus())
                 ->setCode($httpResponse['status']['code'])->setMessage($httpResponse['status']['message'])
         );
-        $nfeErrorResponse->getResponse()->setError($httpResponse['errors']);
+        $statusErrorResponse->getResponse()->setError($httpResponse['error']);
 
-        return $nfeErrorResponse;
+        return $statusErrorResponse;
     }
 }

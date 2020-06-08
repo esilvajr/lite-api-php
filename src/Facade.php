@@ -3,7 +3,7 @@
 namespace Arquivei\LiteApi\Sdk;
 
 use Arquivei\LiteApi\Sdk\Dependencies\HttpGuzzleAdapter;
-use \Arquivei\LiteApi\Sdk\Endpoints;
+use Arquivei\LiteApi\Sdk\Endpoints;
 use Arquivei\LiteApi\Sdk\Requests;
 
 class Facade
@@ -17,10 +17,10 @@ class Facade
 
         $nfeEndpoint = new Endpoints\NFe();
 
-        return $nfeEndpoint->execute($httpClient, $nfeRequest, new \Arquivei\LiteApi\Sdk\Config());
+        return $nfeEndpoint->execute($httpClient, $nfeRequest, new Config());
     }
 
-    public function status(string $accessKey)
+    public function status(string $accessKey): Responses\Status
     {
         $httpClient = new HttpGuzzleAdapter(new \GuzzleHttp\Client);
 
@@ -28,6 +28,6 @@ class Facade
         $statusRequest->setAccessKey($accessKey);
 
         $statusEndpoint = new Endpoints\Status();
-        return $statusEndpoint->execute($httpClient, $statusRequest, new \Arquivei\LiteApi\Sdk\Config());
+        return $statusEndpoint->execute($httpClient, $statusRequest, new Config());
     }
 }

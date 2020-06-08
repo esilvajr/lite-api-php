@@ -2,7 +2,7 @@
 
 namespace Arquivei\LiteApi\Sdk;
 
-Use Arquivei\LiteApi\Sdk\Exceptions\UnreadableConfigException;
+use Arquivei\LiteApi\Sdk\Exceptions\UnreadableConfigException;
 
 class Config
 {
@@ -11,9 +11,9 @@ class Config
 
     public function __construct()
     {
-        $this->env = function (string $key){
+        $this->env = function (string $key) {
             $value = getenv($key);
-            if (empty($value) || is_null($value)){
+            if (empty($value) || is_null($value)) {
                 throw new UnreadableConfigException();
             }
             return $value;

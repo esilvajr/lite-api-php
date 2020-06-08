@@ -8,10 +8,9 @@ use Arquivei\LiteApi\Sdk\Responses\NFe as NFeResponse;
 
 class NFeFactory
 {
-    public function createFromArray(array $httpResponse): NFe {
-
+    public function createFromArray(array $httpResponse): NFe
+    {
         if ($httpResponse['status']['code'] == 200) {
-
             $nfeSucessfullyResponse = new NFeResponse(new NFeResponse\IsSuccess());
 
             $nfeSucessfullyResponse->setStatus(
@@ -28,7 +27,7 @@ class NFeFactory
         $nfeErrorResponse->setStatus(
             (new Status())->setCode($httpResponse['status']['code'])->setMessage($httpResponse['status']['message'])
         );
-        $nfeErrorResponse->getResponse()->setError($httpResponse['errors']);
+        $nfeErrorResponse->getResponse()->setError($httpResponse['error']);
 
         return $nfeErrorResponse;
     }

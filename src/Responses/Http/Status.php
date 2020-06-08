@@ -12,11 +12,12 @@ class Status
         return $this->code;
     }
 
-    public function setCode($code): Status
+    public function setCode(int $code): Status
     {
         $this->code = $code;
         return $this;
     }
+
     public function getMessage(): string
     {
         return $this->message;

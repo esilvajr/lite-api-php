@@ -17,7 +17,6 @@ class HttpGuzzleAdapter implements HttpInterface
 
     public function get(string $method, string $host, string $endpoint, array $options = array()): array
     {
-
         try {
             $uri = function ($host, $endpoint, $options) {
                 $len = strlen($host);
@@ -37,12 +36,14 @@ class HttpGuzzleAdapter implements HttpInterface
                 return sprintf("%s/%s/", $host, $endpoint);
             };
 
-            $response = $this->client->request($method, $uri($host, $endpoint, $options), [
-                'headers' => $options['headers']
-            ]);
-
+            $response = $this->client->request(
+                $method,
+                $uri($host, $endpoint, $options),
+                [
+                    'headers' => $options['headers']
+                ]
+            );
         } catch (\Exception $exception) {
-
             if ($exception instanceof ClientException) {
                 $response = $exception->getResponse();
             }

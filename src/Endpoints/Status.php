@@ -9,11 +9,12 @@ use Arquivei\LiteApi\Sdk\Factories\Responses\StatusFactory;
 
 class Status
 {
-
-    public function execute(HttpInterface $httpConnection, StatusRequest $statusRequest, Config $config)
-    {
+    public function execute(
+        HttpInterface $httpConnection,
+        StatusRequest $statusRequest,
+        Config $config
+    ): \Arquivei\LiteApi\Sdk\Responses\Status {
         try {
-
             $httpResponse = $httpConnection->get(
                 "GET",
                 $config->getLiteApiHost(),
@@ -31,7 +32,6 @@ class Status
             );
 
             return (new StatusFactory)->createFromArray($httpResponse);
-
         } catch (\Exception $exception) {
             throw $exception;
         }
